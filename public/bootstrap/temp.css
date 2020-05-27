@@ -1,0 +1,833 @@
+.mrs-films > .card.mrs-film{  
+    padding-top: 36px;
+    background: transparent!important;
+    border: none;
+}
+
+.card.mrs-film {
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover .mrs-film-img:before {
+    bottom: 0;
+}
+
+.card .mrs-film-img img {
+    width: 100%;
+    transition: 0.5s;
+}
+
+.card:hover .mrs-film-img img {
+    filter: blur(2px);
+    transform: translateY(-30px);
+}
+
+.mrs-film-details {
+    position: absolute;
+    padding: 24px;
+    width: 100%;
+    height: 72%;
+    bottom: -54%;
+    left: 0;
+    box-sizing: border-box;
+    transition: 0.5s;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.4);
+    font-size: 0.6rem;
+}
+
+a.mrs-film-reserve{ 
+    text-decoration: none;
+    padding: 0.1rem 0.8rem;
+    color: #FFFFFF;
+    font-size: 0.6rem;
+    background-color: #1bb55f;
+    border-radius: 1.0rem;
+    border: 2px solid #1bb55f;
+    float: right;
+}
+
+a.mrs-table:hover{
+    color: white;
+    background-color: transparent;
+}
+
+.card:hover .mrs-film-details {
+    bottom: 0;
+}
+
+.mrs-film-details .mrs-film-info, .mrs-film-details .mrs-film-reserve{
+    display: none;
+}
+
+.card:hover .mrs-film-details .mrs-film-info, .card:hover .mrs-film-reserve{
+    bottom: 0;
+    display: unset;
+}
+
+
+.mrs-film-details h2 {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card:hover .mrs-film-details h2 {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    text-overflow: unset;
+    white-space: unset;
+    overflow: unset;
+}
+
+.mrs-film-details h2 span {
+    font-size: 14px;
+    color: #ff9800;
+}
+
+.mrs-film-rating {
+    position: relative;
+    padding: 5px, 0;
+}
+
+.mrs-film-rating .fa {
+    color: #f7f406;
+    margin-right: 2px;
+    font-size: 16px;
+}
+
+.mrs-film-rating span {
+    color: #fff;
+    padding: 0 5px;
+}
+
+.mrs-film-tags {
+    position: relative;
+    margin-top: 5px;
+}
+
+.mrs-film-tags span {
+    padding: 2px 5px;
+    margin-right: 2px;
+    color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.mrs-film-tags span.fantasy {
+    background: #7206f7;
+}
+
+.mrs-film-tags span.scifi {
+    background: #f70661;
+}
+
+.mrs-film-info {
+    margin-top: 8px;
+    color: #fff;
+}
+
+.mrs-film-info p {
+    margin: 15px 10px;
+}
+
+.reservation-list-button{ display: inline-block; }
+
+.cancel-list-button {  text-decoration: none;
+    padding: .2rem 1.2rem;
+    color: #FFFFFF;
+    background-color: #ff5b6b ;
+    border-radius: 1.0rem;
+    border: 2px solid #ff5b6b;
+}
+
+button.cancel-list-button:hover {   background: #ff0000;
+    background: transparent;
+    color: white; 
+}
+
+.edit-list-button {     text-decoration: none;
+    padding: .2rem 1.2rem;
+    color: #FFFFFF;
+    background-color: #007bff;
+    border-radius: 1.0rem;
+    border: 2px solid #007bff; 
+}
+
+button.edit-list-button:hover {  
+    background: transparent;
+    color: white; 
+}
+
+/*.star {
+    position: relative;
+}
+
+.star h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color: #f7f406
+}
+
+.star ul {
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+}
+
+.star ul li {
+    list-style: none;
+    width: 45px;
+    height: 45px;
+    background: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 6px;
+    border: 2px solid #fff;
+}
+
+.star ul li img {
+    width: 100%;
+}*/
+
+
+.mrs-reserve-title{
+    font-size: 2.0rem;
+    color: white;
+    text-transform: capitalize;
+}
+
+.mrs-reserve-film p.mrs-rating{
+    color: #FFFD82;
+}
+
+.mrs-reserve-film > div{
+    padding: 0;
+}
+
+.mrs-reserve-sched{
+    /*background-color: #343a40d6;*/
+    border: none;
+}
+
+.mrs-seat{    
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.mrs-seat > span{
+    display: none;
+    font-weight: bold;
+}
+
+.mrs-seat-selected{
+    background-color: #FFFD82; 
+    color: #333333;
+    border-color: #FFFD82; 
+}
+
+.mrs-seat-taken{
+    background-color: #9999FF; 
+    color: #333333;
+    border-color: #9999FF; 
+}
+
+.mrs-seat-available{
+    background-color: #FFFFFF; 
+    color: #333333;
+    border-color: #FFFFFF; 
+}
+
+/**.mrs-film-details {
+    bottom: -290px;
+}**/
+
+/*FOOTER CSS*/
+
+.mrs-footer {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 30px 30px 20px 30px;
+    background-color: black;
+    border-top: 4px solid #BAD9B5;
+}
+
+.mrs-footer > * {
+    flex:  1 100%;
+}
+
+.mrs-footer-addr {
+    margin-right: 1.25em;
+}
+
+.mrs-footer-addr h2 {
+    margin-top: 1.3em;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.nav-title {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.mrs-footer address {
+    font-style: normal;
+    color: #999;
+}
+
+.mrs-footer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    max-width: max-content;
+    border-radius: 100px;
+    line-height: 0;
+    margin: 0.6em 0;
+    font-size: 1rem;
+    padding: 0 1.3em;
+}
+
+.mrs-footer ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.mrs-footer li {
+    line-height: 2em;
+}
+
+.mrs-footer a {
+    text-decoration: none;
+}
+
+.mrs-footer-nav {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.mrs-footer-nav > * {
+    flex: 1 50%;
+    margin-right: 1.25em;
+}
+
+.nav-ul a {
+    color: #999;
+}
+
+.nav-ul-extra {
+    column-count: 2;
+    column-gap: 1.25em;
+}
+
+.mrs-footer-copy {
+    display: block;
+    color: #999;
+    text-align: center;
+}
+
+.mrs-footer-copy .mrs-brand{
+  font-size: 1.2rem;
+  margin-right: 4px;
+}
+  
+.mrs-footer-copy-links {
+    display: flex;
+    align-items: center;
+}
+
+.heart {
+    color: #2f2f2f;
+}
+
+@media screen and (min-width: 24.375em) {
+    .mrs-footer-legal .mrs-footer-legal-links {
+      margin-left: auto;
+    }
+}
+
+@media screen and (min-width: 40.375em) {
+    .mrs-footer-nav > * {
+        flex: 1;
+    }
+    
+    .nav-item-extra {
+        flex-grow: 2;
+    }
+    
+    .mrs-footer-addr {
+        flex: 1 0px;
+    }
+    
+    .mrs-footer-nav {
+        flex: 2 0px;
+    }
+}
+
+.mrs-film-reserve a{
+    text-decoration: none;
+    padding: .2rem 1.2rem;
+    color: #444444;
+    background-color: #FFFD82;
+    border-radius: 1.0rem;
+    border: 2px solid #FFFD82;
+}
+
+/* The Modal (background) */
+#mrs-summary .modal-content{
+    background-color: transparent; 
+    border: none;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  color: #000000;
+  font-size: 62.5%; 
+}
+
+/* The Close Button */
+/*.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}*/
+
+/*MODAL CONTENT*/
+
+.main-wrapper
+{
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: none;
+    -webkit-box-shadow: 0px 20px 10px 10px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 20px 10px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 20px 10px 10px rgba(0,0,0,0.1);
+}
+
+.basket-header
+{
+    border-radius: 15px 0 0 0;
+    -moz-border-radius: 15px 0 0 0;
+    -webkit-border-radius: 15px 0 0 0;
+    padding-left: 25px !important;
+}
+
+.creditcard-header
+{
+    border-radius: 0 15px 0 0;
+    -moz-border-radius: 0 15px 0 0;
+    -webkit-border-radius: 0 15px 0 0;
+    padding-left: 35px !important;
+}
+
+.panel-wrapper
+{
+}
+
+.panel-header
+{
+    background: #166D9A;
+    height: 80px;
+    padding: 15px 20px 0 20px;
+}
+
+.panel-wrapper .basket-header .column-titles
+{
+    color: #A2C6DD;
+    padding: 0;
+    margin: 0;
+    /* font-family: 'Anton', sans-serif; */
+    display: none;
+    visibility: hidden;
+}
+
+.fix-overflow
+{
+    padding-right: 5px !important;
+}
+
+.panel-wrapper .basket-body
+{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.panel-wrapper .creditcard-body
+{
+    padding: 30px 40px 0 40px;
+}
+
+.panel-wrapper .panel-body
+{
+    font-weight: 400;
+    font-size: 1.2em;
+    outline: none !important;
+    min-height: 350px;
+    max-height: 350px;
+}
+
+.basket-body
+{
+    background: #F9F9F9;
+}
+
+.creditcard-body
+{
+    background: white;
+}
+
+.basket-body .row.product
+{
+    margin: 5px 0 5px 0;
+    padding:  5px 0 5px 0;
+    border-bottom: solid 1px #eeeeee;
+}
+
+.basket-body .row.product div
+{
+    color: #777879;
+    padding: 0 10px 0 10px;
+}
+
+.basket-body .row.product .product-image
+{
+}
+
+.product-image img
+{
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 80px;
+}
+
+.card-wrapper
+{
+    height: 100%;
+}
+
+.padding-top-10
+{
+    padding-top: 10px !important;
+}
+
+.padding-top-20
+{
+    padding-top: 20px !important;
+}
+
+.padding-horizontal-40
+{
+    padding: 0 40px 0 40px;
+}
+
+.align-right
+{
+    text-align: right;
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.emphasized
+{
+    /* font-family: 'Anton', sans-serif; */
+    /* font-family: 'Roboto Condensed', sans-serif; */
+    /* font-family: 'Raleway', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.6em;
+    color: white;
+}
+
+.description
+{
+    /* font-family: 'Anton', sans-serif; */
+    /* font-family: 'Roboto Condensed', sans-serif; */
+    /* font-family: 'Raleway', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.2em;
+    color: #A2C6DD;
+}
+
+.panel-footer
+{
+    padding-top: 10px;
+    height: 150px;
+}
+
+.basket-footer
+{
+    background: #166D9A;
+    border-radius: 0 0 0 15px;
+    -moz-border-radius: 0 0 0 15px;
+    -webkit-border-radius: 0 0 0 15px;
+}
+
+.basket-footer .title, .basket-footer .subtitle
+{
+}
+
+.creditcard-footer
+{
+    background: white;
+    border-radius: 0 0 15px 0;
+    -moz-border-radius: 0 0 15px 0;
+    -webkit-border-radius: 0 0 15px 0;
+    padding: 75px 30px 0 30px;
+}
+
+.basket-footer .row .subtitle, .basket-footer .row .title
+{
+}
+
+.panel-footer hr
+{
+    margin: 3px 0 3px 0;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #197fb3;
+    padding: 0;
+}
+
+.panel-footer button
+{
+    border: solid 1px #166D9A;
+    background: #166D9A;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: white;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    padding: 10px 15px 11px 15px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.panel-footer button:hover
+{
+    cursor: pointer;
+}
+
+button.cancel
+{
+    background: white;
+    color: #166D9A;
+}
+
+button.cancel:hover
+{
+    background: #ff0000;
+    border-color: #ff0000;
+    color: white;
+}
+
+button.confirm:hover
+{
+    background: #00b300;
+    border-color: #00b300;
+    color: white;
+}
+
+.dive
+{
+    margin-top: 5px;
+}
+
+.sub
+{
+    font-size: 75%;
+    color: #aaaaaa;
+}
+
+.very
+{
+    font-size: 2.1em;
+}
+
+.creditcard-body form
+{
+    font-size: 1.3em;
+}
+ 
+.creditcard-body form i.fa
+{
+    margin-right: 10px;
+    color: #166D9A;
+}
+
+.creditcard-body form fieldset
+{
+    border-bottom: dotted 2px #D0D0D0;
+    margin-bottom: 25px;
+}
+
+.creditcard-body form input
+{
+    border: none;
+    font-weight: 600;
+    color: #555555;
+    width: 85%;
+    outline: none;
+}
+
+.creditcard-body form input::placeholder
+{
+    color: #D0D0D0;
+}
+
+.creditcard-body form label
+{
+    color:  #aaaaaa;
+}
+
+.additional
+{
+    font-weight: 300;
+    font-size: 80%;
+}
+
+.fa-info-circle
+{
+    color: #aaaaaa !important;
+}
+
+span.month.focused.active
+{
+    background: #166D9A !important;
+    background-image: none !important;
+}
+
+
+@media (max-width: 992px)
+{
+}
+
+@media (max-width: 767px)
+{
+    
+    .basket-header
+    {
+        border-radius: 15px 15px 0 0;
+        -moz-border-radius: 15px 15px 0 0;
+        -webkit-border-radius: 15px 15px 0 0;
+    }
+    
+    .basket-footer
+    {
+        background: #166D9A;
+        border-radius: 0;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+    }    
+    
+    .creditcard-header
+    {
+        border-radius: 0;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+    }
+    
+    .creditcard-footer
+    {
+        border-radius: 0 0 15px 15px;
+        -moz-border-radius: 0 0 15px 15px;
+        -webkit-border-radius: 0 0 15px 15px;
+    }
+    
+}
+
+
+/* Adjustments using Bootstrap breakpoints */
+
+@media (min-width: 576px) {
+    .mrs-seat > span{
+        display: inline;
+    }
+
+    .mrs-film-details {
+        bottom: -62%;
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    section.mrs-user{
+        padding: 8px;
+        margin: 8px 0px;
+        background-color: #BBBBBB;
+        color: #555;
+        border-radius: 4px;
+        width: fit-content;
+    }
+
+    .mrs-film-details {
+        bottom: -56%;
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 992px) {
+    section.mrs-user{
+        padding: unset;
+        background-color: transparent;
+        color: unset;
+        padding-right: 8px;
+    }
+
+    .mrs-film-details {
+        bottom: -50%;
+        font-size: 0.8rem;
+    }
+
+    a.mrs-film-reserve{ 
+        font-size: 1.0rem;
+    }
+}
+
+@media (min-width: 1200px) {
+
+}

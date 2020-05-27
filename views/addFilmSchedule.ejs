@@ -1,0 +1,37 @@
+<%- include("partials/header") %>
+
+
+<div class="ui main text container segment">
+    <div class="ui huge header">New Film Schedule</div>
+
+    <form class="ui form" action="/addFilmSchedule" method="POST">
+        <div class="field">
+            <label>Movie</label>
+            <select name="sched[movie_id]">
+                <option value="tt4154796">Avengers: Endgame</option>
+                <option value="tt6751668">Parasite</option>
+                <option value="tt7286456">Joker</option>
+                <option value="tt1979376">Toy Story 4</option>
+                <option value="tt2911666">John Wick</option>
+                <option value="tt4154664">Captain Marvel</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Date</label>
+            <input type="date" name="sched[date]" placeholder="Date">
+        </div>
+        <div class="field">
+            <label>Time</label>
+            <input type="text" name="sched[time]" placeholder="Time">
+        </div>
+        <div class="field">
+            <label>Cinema #</label>
+            <input type="number" name="sched[cinema_no]" placeholder="Cinema #">
+        </div>
+        <input class="ui violet big basic button" type="submit">
+    </form>
+
+</div>
+
+
+<%- include("partials/footer") %>

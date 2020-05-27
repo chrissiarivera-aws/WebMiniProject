@@ -1,0 +1,267 @@
+@font-face{
+    font-family: "GreatVibes-Regular";
+    src: url('../font/GreatVibes-Regular.ttf');
+}
+
+@font-face{
+    font-family: "Monoton-Regular";
+    src: url('../font/Monoton-Regular.ttf');
+    /*url('Thonburi-Bold.eot');*/ /* IE */
+}
+
+@font-face{
+    font-family: "Anton-Regular";
+    src: url('../font/Anton-Regular.ttf');
+}
+
+html{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body{
+    background-image: url('../img/admission-2974645_1920.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    font-family: acumin-pro, system-ui, sans-serif;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-size: 14px;
+    align-items: start;
+    min-height: 100vh;
+    width: 100%;
+}
+
+input[type="date"]{
+    min-width: fit-content
+}
+
+main{
+  width: 100%;
+  margin: 64px 0 32px 0;
+}
+
+main.mrs-home{
+  margin-top: 0px;
+}
+
+.mrs-navigation{
+    z-index: 501;
+    font-size: 1.1rem;
+    line-height: 1.0em
+}
+
+.mrs-brand{
+    font-family: "GreatVibes-Regular",sans-serif !important;
+    font-size: 2.0rem;
+    margin-top: 8px;
+}
+
+.mr-brand.nav-brand{  
+    margin-left: 24px;
+    margin-right: 24px; 
+}
+
+.mrs-navigation-list > .mrs-navigation-link{
+    alignment-baseline: baseline;
+    font-size: 1.2rem;
+    /*font-weight: 600;
+    margin: auto 4px;*/
+}
+
+.mrs-navigation-list > .mrs-navigation-link, .mrs-nav-search{
+    text-align-last: left;
+    display: block;
+}
+
+.mrs-navigation-link.mrs-navigation-link-reserve > a{
+    color: #118AB2 !important;
+}
+
+.mrs-navigation-link.mrs-navigation-link-reserve:hover > a{
+    text-decoration: underline;
+    color: #FFFFE8 !important;
+}
+
+.mrs-navigation-link.mrs-navigation-link-reserve.active > a{
+    text-decoration: underline;
+}
+
+.mrs-user{
+    padding: 0 16px;
+}
+
+.mrs-user > span{
+    vertical-align: middle;
+}
+
+.mrs-user-avatar{
+    width: 2.4rem;
+    padding-right: 4px;
+}
+
+/*  General Style */
+
+::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.4);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
+}
+
+.mrs-section{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.mrs-section > h2{
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+    font-family: "Anton-Regular";
+    font-size: 2.5em;
+    border-bottom: 2px solid #CCCCCC;
+    display: block;
+}
+
+.mrs-paragraph{
+    text-indent: 24px;
+}
+
+.mrs-rounded-btn{
+    color: white;
+    padding: 0.5rem 2.0rem;
+    border-radius: 1.5rem;
+    background-color: #118AB2;
+    text-align: center;
+    text-transform: uppercase;
+    border: 2px solid #118AB2;
+}
+
+.mrs-rounded-btn:hover{
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+/*   Table Style   */
+
+.mrs-table{
+    margin: 0 auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.mrs-table thead tr{
+    color: #FFFFFF;
+    background-color: #1C5D99;
+}
+
+.mrs-table tbody{
+    color: white;
+}
+
+.mrs-table tr{
+    text-align: center;
+    line-height: 1.4em;
+    vertical-align: middle;
+}
+
+.mrs-table a{
+    text-decoration: none;
+    padding: .2rem 1.2rem;
+    color: white;
+    background-color: #118AB2;
+    border-radius: 1.0rem;
+    border: 2px solid #118AB2;
+}
+
+.mrs-table a:hover{
+    background-color: transparent;
+}
+
+
+/*   Footer Style   */
+
+.mrs-footer{
+    padding: 32px 32px 8px 32px ;
+    border-top: 2px solid #CCCCCC;
+}
+
+.mrs-footer li{
+    list-style: none;
+}
+
+.mrs-footer a{
+    color: #83a0be;
+}
+
+.mrs-footer a:hover{
+    text-decoration: none;
+}
+
+.mrs-footer-copy-wrapper{
+    border-top: 1px dotted #ccc;
+    margin-top: 16px;
+    text-align: -webkit-center;
+    text-align: center;
+}
+
+.mrs-footer-copy{
+    font-size: 0.8rem;
+    font-style: italic;
+    margin: 0 auto;
+    line-height: 2.6rem;
+    vertical-align: middle;
+}
+
+.mrs-footer-copy .mrs-brand{
+    font-size: 1.2rem!important;
+    padding: 0 8px; 
+}
+
+
+
+/* Adjustments using Bootstrap breakpoints */
+
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+    section.mrs-user{
+        padding: 8px;
+        margin: 8px 0px;
+        background-color: #BBBBBB;
+        color: #555;
+        border-radius: 4px;
+        width: fit-content;
+    }
+}
+
+@media (min-width: 992px) {
+    section.mrs-user{
+        padding: unset;
+        background-color: transparent;
+        color: unset;
+        padding-right: 8px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+}
+

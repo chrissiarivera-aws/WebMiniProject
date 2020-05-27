@@ -1,0 +1,288 @@
+<%- include("partials/header") %>
+
+
+    <link rel="stylesheet" href="/bootstrap/order.css">
+    <title>Order Form</title>
+    <script type="text/javascript">
+        //Modal Popup Controller
+        function toggle_visibility(id){
+            var e = document.getElementById(id);
+
+        if(e.style.display == 'block')
+            e.style.display = 'none';
+        else 
+            e.style.display = 'block';
+        }
+    </script>
+    <style>
+        .popup-position{
+            display:none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.7);
+            width: 100%;
+            height: 100%;
+
+        }
+
+        #popup-wrapper{
+        text-align: left;
+        }
+
+        #popup-container{
+
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: 70px auto;
+        }
+
+        #popup-container.a {
+                cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>    
+    <nav class="mrs-navigation navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="mrs-brand navbar-brand" href="/">Reserved</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+            <ul class="mrs-navigation-list navbar-nav mr-auto">
+                <li class="mrs-navigation-link nav-item">
+                    <a class="nav-link" href="/films">Films</a>
+                </li>
+                <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item">
+                    <a class="nav-link" href="/reservedSeats">Reserved<span class="sr-only"></span></a>
+                </li>
+                <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item active">
+                    <a class="nav-link" href="reserve.html">Reserve Seats<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <section class="mrs-user navigation-link">
+                <img class="mrs-user-avatar" src="/img/user-avatar.png">
+                <span>John Smith</span>
+            </section>
+            <form class="mrs-nav-search form-inline my-2 my-lg-0" method="get" action="reserve.html">
+                <input class="form-control mr-sm-2" type="search"  name="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <main>
+        <div class="mrs-order mrs-section container">
+            <h2>Reservation Form</h2>
+            <div class="mrs-order-content">
+                <form action="/checkout/<%= user._id %>/<%= film._id %>/<%= sched._id %>" method="POST" onsubmit="return confirm('Continue reserving seat(s)?');">
+                    <div class="form-group row">
+                        <label for="mrs-order-name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="mrs-order-name" value="<%= user.name %>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mrs-order-film" class="col-sm-2 col-form-label">Film</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="mrs-order-film" value="<%= film.title %>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mrs-order-film" class="col-sm-2 col-form-label">Schedule #</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="mrs-order-film" value="<%= sched._id %>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mrs-order-cinema" class="col-sm-2 col-form-label">Cinema</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="mrs-order-cinema" value="<%= sched.cinema_no %>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mrs-order-datetime" class="col-sm-2 col-form-label">Time/Date</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="mrs-order-time" value="<%= sched.time %>" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="mrs-order-date" value="<%= sched.date.toDateString() %>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mrs-order-seatnum" class="col-sm-2 col-form-label">No. of seats</label>
+
+                        <label for="mrs-order-regulars" class="col-sm-1 col-form-label">Regular</label>
+                        <div class="col-sm-1">
+                            <input type="number" min="0" class="form-control" id="mrs-order-regulars" placeholder="Regulars" name="noOfRegulars" value="0">
+                        </div>
+                        <label for="mrs-order-kids" class="col-sm-1 col-form-label">Kid</label>
+                        <div class="col-sm-1">
+                            <input type="number" min="0" class="form-control" id="mrs-order-kids" placeholder="Kids" name="noOfKids" value="0">
+                        </div>
+                        <label for="mrs-order-seniors" class="col-sm-1 col-form-label">Senior</label>
+                        <div class="col-sm-1">
+                            <input type="number" min="0" class="form-control" id="mrs-order-seniors" placeholder="Seniors" name="noOfSeniors" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <table class="mrs-table table table-dark">
+                                <thead class="thead">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">1</th>
+                                        <th scope="col">2</th>
+                                        <th scope="col">3</th>
+                                        <th scope="col">4</th>
+                                        <th scope="col">5</th>
+                                        <th scope="col">6</th>
+                                        <th scope="col">7</th>
+                                        <th scope="col">8</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mrs-order-seat">
+                                    <% if(sched.reserved.length == 0) { %>
+                                        <tr>
+                                            <th scope="row">A</th>
+                                            <td><input id="mrs-seat-a1" class="seat-select" type="checkbox" value="a1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a2" class="seat-select" type="checkbox" value="a2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a3" class="seat-select" type="checkbox" value="a3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a4" class="seat-select" type="checkbox" value="a4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a5" class="seat-select" type="checkbox" value="a5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a6" class="seat-select" type="checkbox" value="a6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a7" class="seat-select" type="checkbox" value="a7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-a8" class="seat-select" type="checkbox" value="a8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">B</th>
+                                            <td><input id="mrs-seat-b1" class="seat-select" type="checkbox" value="b1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b2" class="seat-select" type="checkbox" value="b2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b3" class="seat-select" type="checkbox" value="b3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b4" class="seat-select" type="checkbox" value="b4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b5" class="seat-select" type="checkbox" value="b5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b6" class="seat-select" type="checkbox" value="b6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b7" class="seat-select" type="checkbox" value="b7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-b8" class="seat-select" type="checkbox" value="b8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">C</th>
+                                            <td><input id="mrs-seat-c1" class="seat-select" type="checkbox" value="c1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c2" class="seat-select" type="checkbox" value="c2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c3" class="seat-select" type="checkbox" value="c3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c4" class="seat-select" type="checkbox" value="c4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c5" class="seat-select" type="checkbox" value="c5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c6" class="seat-select" type="checkbox" value="c6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c7" class="seat-select" type="checkbox" value="c7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-c8" class="seat-select" type="checkbox" value="c8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">D</th>
+                                            <td><input id="mrs-seat-d1" class="seat-select" type="checkbox" value="d1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d2" class="seat-select" type="checkbox" value="d2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d3" class="seat-select" type="checkbox" value="d3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d4" class="seat-select" type="checkbox" value="d4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d5" class="seat-select" type="checkbox" value="d5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d6" class="seat-select" type="checkbox" value="d6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d7" class="seat-select" type="checkbox" value="d7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-d8" class="seat-select" type="checkbox" value="d8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">E</th>
+                                            <td><input id="mrs-seat-e1" class="seat-select" type="checkbox" value="e1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e2" class="seat-select" type="checkbox" value="e2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e3" class="seat-select" type="checkbox" value="e3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e4" class="seat-select" type="checkbox" value="e4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e5" class="seat-select" type="checkbox" value="e5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e6" class="seat-select" type="checkbox" value="e6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e7" class="seat-select" type="checkbox" value="e7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-e8" class="seat-select" type="checkbox" value="e8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">F</th>
+                                            <td><input id="mrs-seat-f1" class="seat-select" type="checkbox" value="f1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f2" class="seat-select" type="checkbox" value="f2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f3" class="seat-select" type="checkbox" value="f3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f4" class="seat-select" type="checkbox" value="f4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f5" class="seat-select" type="checkbox" value="f5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f6" class="seat-select" type="checkbox" value="f6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f7" class="seat-select" type="checkbox" value="f7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-f8" class="seat-select" type="checkbox" value="f8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">G</th>
+                                            <td><input id="mrs-seat-g1" class="seat-select" type="checkbox" value="g1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g2" class="seat-select" type="checkbox" value="g2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g3" class="seat-select" type="checkbox" value="g3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g4" class="seat-select" type="checkbox" value="g4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g5" class="seat-select" type="checkbox" value="g5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g6" class="seat-select" type="checkbox" value="g6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g7" class="seat-select" type="checkbox" value="g7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-g8" class="seat-select" type="checkbox" value="g8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">H</th>
+                                            <td><input id="mrs-seat-h1" class="seat-select" type="checkbox" value="h1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h2" class="seat-select" type="checkbox" value="h2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h3" class="seat-select" type="checkbox" value="h3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h4" class="seat-select" type="checkbox" value="h4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h5" class="seat-select" type="checkbox" value="h5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h6" class="seat-select" type="checkbox" value="h6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h7" class="seat-select" type="checkbox" value="h7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-h8" class="seat-select" type="checkbox" value="h8" name="seat[]" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">I</th>
+                                            <td><input id="mrs-seat-i1" class="seat-select" type="checkbox" value="i1" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i2" class="seat-select" type="checkbox" value="i2" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i3" class="seat-select" type="checkbox" value="i3" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i4" class="seat-select" type="checkbox" value="i4" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i5" class="seat-select" type="checkbox" value="i5" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i6" class="seat-select" type="checkbox" value="i6" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i7" class="seat-select" type="checkbox" value="i7" name="seat[]" /></td>
+                                            <td><input id="mrs-seat-i8" class="seat-select" type="checkbox" value="i8" name="seat[]" /></td>
+                                        </tr>
+                                    <% } else { %>
+                                        <% for(var i = 65; i <= 73; i++) { %>
+                                            <% var char = String.fromCharCode(i).toLowerCase(); %>
+                                            <% var result = ""; %>
+
+                                            <tr>
+                                                <th scope="row"><%= String.fromCharCode(i) %></th>
+                                                <% for(var j = 1; j <= 8; j++) { %>
+                                                    <% result = char + j; %>
+                                                    <% if(seats.includes(result.toString())){ %>
+                                                        <td><input id="mrs-seat-<%= result %>" class="seat-select" type="checkbox" value="<%= result %>" name="seat[]" disabled/></td>
+                                                    <% } else { %>
+                                                        <td><input id="mrs-seat-<%= result %>" class="seat-select" type="checkbox" value="<%= result %>" name="seat[]" /></td>                                                       
+                                                    <% } %>                                                       
+                                                <% } %>
+                                            </tr>
+                                        <% } %>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                 
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="submit" id="mrs-order-proceed" class="mrs-film-reserve mrs-rounded-btn btn btn-primary float-right" value="Checkout">
+
+                            <!-- <input type="submit" id="mrs-order-proceed" onclick="toggle_visibility('contact-popup')" class="mrs-film-reserve mrs-rounded-btn btn btn-primary float-right" value="Checkout"> -->
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="/javascript/order.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+
+<%- include("partials/footer") %>

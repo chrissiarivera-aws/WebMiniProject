@@ -1,0 +1,72 @@
+@import "style.css";
+
+button.mrs-seat{
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.mrs-seat > span{
+    display: none;
+    font-weight: 500;
+}
+
+.mrs-seat-selected{
+    background-color: #FFFD82; 
+    color: #333333;
+    border-color: #FFFD82; 
+}
+
+.mrs-seat-taken{
+    background-color: #118AB2; 
+    color: #CCCCCC;
+    border-color: #118AB2; 
+}
+
+.mrs-seat-available{
+    background-color: #FFFFFF; 
+    color: #333333;
+    border-color: #FFFFFF; 
+}
+
+
+#mrs-order-modal{
+    color: black;
+}
+
+
+#mrs-order-modal .form-control, #mrs-order-modal .btn{
+    font-size: 0.8rem;
+}
+
+#mrs-order-modal label{
+    font-size: 0.8rem;
+    color: black;
+}
+
+#mrs-order-modal-title{
+    color: black;
+}
+
+/* Adjustments using Bootstrap breakpoints */
+
+@media (min-width: 576px) {
+    .mrs-seat > span{
+        display: inline;
+    }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+/* Temp */
+

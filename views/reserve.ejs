@@ -1,0 +1,54 @@
+<%- include("partials/header") %>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/style.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/search.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/films.css">
+    <title>Reserved</title>
+</head>
+
+<body>    
+    <nav class="mrs-navigation navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="mrs-brand navbar-brand" href="/">Reserved</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+            <ul class="mrs-navigation-list navbar-nav mr-auto">
+                <li class="mrs-navigation-link nav-item">
+                    <a class="nav-link" href="/films">Films</a>
+                </li>
+                <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item">
+                    <a class="nav-link" href="/reservedSeats">Reserved<span class="sr-only"></span></a>
+                </li>
+                <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item active">
+                    <a class="nav-link" href="reserve.html">Reserve Seats<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <section class="mrs-user navigation-link">
+                <img class="mrs-user-avatar" src="img/user-avatar.png">
+                <span>John Smith</span>
+            </section>
+            <form class="mrs-nav-search form-inline my-2 my-lg-0" method="get" action="reserve.html">
+                <input class="form-control mr-sm-2" type="search"  name="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <main>
+        <div class="mrs-section container">
+            <h2 class="mrs-reserve-title">Search a Film</h2>
+
+            <form class="mrs-reserve-search form-inline" method="get" target="reserve.html">
+                <div class="form-group d-flex flex-row">                    
+                    <input class="form-control form-control-lg flex-grow-1 mr-2" type="search" name="search" placeholder="Type in a film title..." aria-label="Search">
+                    <button class="btn btn-lg btn-success" type="submit">Search</button>
+                </div>
+            </form>
+            <span id="mrs-result-counter">No result</span>
+            <div id="mrs-search-results" class="mrs-films row">
+                
+            </div>
+        </div>
+    </main>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,177 @@
+@import "style.css";
+/*  Films Style*/
+
+.mrs-films{
+    align-self: center;
+}
+
+.mrs-film{
+    margin-top: 32px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.mrs-film .mrs-film-img{
+    width: inherit;
+    align-self: center;
+}
+
+.mrs-film:hover .mrs-film-img{
+    filter: blur(2px);
+    transform: translateY(-24px);
+}
+
+.mrs-film .mrs-film-details{
+    width: inherit;
+    width: -webkit-fill-available;
+    position: absolute;
+    min-height: 1%;
+    padding-top: 16px;
+    bottom: 0px;
+    left: 0;
+    z-index: 2;
+    font-size: 0.8rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.mrs-film:hover .mrs-film-details{
+    bottom: 0;
+}
+
+.mrs-film .mrs-film-title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.mrs-film:hover .mrs-film-title{
+    text-overflow: unset;
+    white-space: unset;
+    overflow: unset;
+}
+
+.mrs-film-details .mrs-film-info{
+    margin-bottom: 8px;
+    height: 50%;
+    text-align: justify;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.mrs-film-details .mrs-film-info, .mrs-film-details .mrs-film-reserve{
+    display: none;
+}
+
+.mrs-film:hover .mrs-film-details .mrs-film-info, 
+.mrs-film:hover .mrs-film-details .mrs-film-reserve{
+    display: block;
+}
+
+.mrs-film .mrs-film-reserve{
+    margin-bottom: 16px;
+}
+
+.mrs-single-film.card{
+    background-color: transparent;
+    border: none;
+}
+
+.mrs-single-film.card .card-body{
+    background-color: rgba(0,0,0,0.4);
+}
+
+.mrs-single-film .mrs-film-title{
+    text-align: center;
+    margin-bottom: 0.2rem;
+}
+
+.mrs-rating{
+    padding: 4px;
+    display: block;
+    text-align: center;
+}
+
+.mrs-rating span{
+    width: 1.0rem;
+    height: 1.0rem;
+    padding: 4px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: middle;
+}
+
+.mrs-rating span.full{
+    background-image: url("../img/star.png");
+}
+
+.mrs-rating span.half{
+    background-image: url("../img/star-half.png");
+}
+
+.mrs-rating span.numeric{
+    display: inline;
+    color: #fcd828;
+    font-weight: bold;
+}
+
+.mrs-film-tags{
+    line-height: 2.2rem;
+}
+
+.mrs-film-tags span{
+    margin: 0 2px;
+    padding: 4px 8px;
+    border-radius: 1.5rem;
+}
+
+.mrs-film-tags span.fantasy{
+    background-color: #5603AD; 
+}
+
+.mrs-film-tags span.action{
+    background-color: #FF7733; 
+}
+
+.mrs-film-tags span.drama{
+    background-color: #8B7F81; 
+}
+
+.mrs-film-tags span.comedy{
+    background-color: #06D6A0; 
+}
+
+.mrs-film-tags span.romance{
+    background-color: #EC0868; 
+}
+
+.mrs-film-tags span.thriller{
+    background-color: #F13030; 
+}
+
+.mrs-film-tags span.sci-fi{
+    background-color: #0D3B66; 
+}
+
+.mrs-film-tags span.family{
+    background-color: #256EFF; 
+}
+
+.mrs-film-tags span.animation{
+    background-color: #FFC300; 
+}
+
+.mrs-film-tags span.adventure{
+    background-color: #FF5733; 
+}
+
+.mrs-film-tags span.crime{
+    background-color: #900C3F; 
+}
+
+

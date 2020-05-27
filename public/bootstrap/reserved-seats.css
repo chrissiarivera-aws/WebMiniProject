@@ -1,0 +1,29 @@
+@import "style.css";
+
+.reservation-list-button{ display: inline-block; }
+
+.cancel-list-button {  text-decoration: none;
+    padding: .2rem 1.2rem;
+    color: #FFFFFF;
+    background-color: #ff5b6b ;
+    border-radius: 1.0rem;
+    border: 2px solid #ff5b6b;
+}
+
+button.cancel-list-button:hover {   background: #ff0000;
+    background: transparent;
+    color: white; 
+}
+
+.edit-list-button {     text-decoration: none;
+    padding: .2rem 1.2rem;
+    color: #FFFFFF;
+    background-color: #007bff;
+    border-radius: 1.0rem;
+    border: 2px solid #007bff; 
+}
+
+button.edit-list-button:hover {  
+    background: transparent;
+    color: white; 
+}

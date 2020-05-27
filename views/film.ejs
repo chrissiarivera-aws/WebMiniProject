@@ -1,0 +1,91 @@
+<%- include("partials/header") %>
+
+
+    <link rel="stylesheet" type="text/css" href="/bootstrap/films.css">
+    </head>
+<body>
+
+<nav class="mrs-navigation navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="mrs-brand navbar-brand" href="/">Reserved</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggle">
+        <ul class="mrs-navigation-list navbar-nav mr-auto">
+            <li class="mrs-navigation-link nav-item">
+                <a class="nav-link" href="/films">Films</a>
+            </li>
+            <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item">
+                <a class="nav-link" href="/reservedSeats">Reserved<span class="sr-only"></span></a>
+            </li>
+            <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item">
+                <a class="nav-link" href="reserve.html">Reserve Seats</a>
+            </li>
+        </ul>
+        <section class="mrs-user navigation-link">
+            <img class="mrs-user-avatar" src="/img/user-avatar.png">
+            <span>John Smith</span>
+        </section>
+        <form class="mrs-nav-search form-inline my-2 my-lg-0" method="get" action="reserve.html">
+            <input class="form-control mr-sm-2" type="search"  name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<main>
+    <div class="mrs-film-summary mrs-section container">
+        <h2 class="mrs-film-summary-title">Schedules</h2>
+        <div class="row">
+            <div id="mrs-current-film-info" class="mrs-single-film col-md-4 card">
+                <img src="<%= film.image %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h4 class="mrs-film-title card-title"><%= film.title %></h4>
+                        <div class="mrs-rating">
+                            <%= film.rating %>
+                        </div>
+                        <div class="mrs-film-tags">
+                            <% var genres = film.genre.split(","); %>
+                            <% genres.forEach(function(genre){ %>
+                                <span class="<%= genre.toLowerCase() %>"><%= genre %></span>
+                            <% }) %>
+                        </div>
+                        <p class="card-text mrs-paragraph"><%= film.description %></p>
+                    </div>
+            </div>
+            <div class="mrs-reserve-sched col-md-8">
+                <table class="mrs-table table table-dark">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Cinema</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Availability</th>
+                            <th scope="col">Want a Seat?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mrs-film-scheds">
+                        <% scheds.forEach(function(sched){ %>
+                            <tr>
+                                <th scope="row"><%= sched.cinema_no %></th>
+                                <td><%= sched.time %></td>
+                                <td><%= sched.date.toDateString() %></td>
+                                <td>
+                                    <% var seats = 72; %>
+                                    <% if(sched.reserved.length > 0) { %>
+                                        <%= seats - sched.reserved.length %>/72
+                                    <% } else { %>
+                                        72/72
+                                    <% } %>
+                                </td>
+                                <td><a href="/order/<%= sched._id %>">Reserve</a></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include("partials/footer") %>
