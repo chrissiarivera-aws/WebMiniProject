@@ -82,7 +82,9 @@
                                             <a class="edit-reservation edit-list-button edit-reservation-btn" href="/editReservation/<%= user._id %>/<%= filmID %>/<%= schedID %>">Edit</a>
                                         </td>
                                         <td class="reservation-list-button">
-                                            <a class="cancel-reservation cancel-list-button cancel-reservation-btn" style="background-color: red; border-color: red;" href="/cancelReservation/<%= user._id %>/<%= filmID %>/<%= schedID %>">Cancel</a>
+                                            <form action="/cancelReservation/<%= user._id %>/<%= filmID %>/<%= schedID %>?_method=DELETE" method="POST">
+                                                <button class="cancel-reservation cancel-list-button cancel-reservation-btn">Cancel</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <% } %>

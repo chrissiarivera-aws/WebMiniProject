@@ -117,6 +117,7 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
 
     if(totalSeats != req.body.seat.length || req.body.seat.length == null){
         // alert("The number of seats selected and inputted do not match. Please try again!");
+        req.flash('info', 'The # of seats inputted and the # of seats selected does not match. Please try again.')
         res.redirect("/film/" + req.params.film);
     } else {
         User.findById(req.params.user, function(err, foundUser){
@@ -264,16 +265,59 @@ app.get("/reservedSeats", function(req, res){
     });
 });
 
+// DELETE RESERVATION ROUTE
+app.delete("/cancelReservation/:userID/:filmID/:schedID", function(req, res){
+    FilmSchedule.findOne({_id: req.params.schedID}).populate("reserved").exec(function(err, foundFilmSched){
+        if(err){
+            console.log(err);
+        } else {   
+            if(foundFilmSched.reserved.length > 1){
+                for(var x in foundFilmSched.reserved){
+                    if(foundFilmSched.reserved[x].owner_id == req.params.userID){
+                        FilmSchedule.update(
+                            { _id: req.params.schedID },
+                            { "$pull": { "reserved": foundFilmSched.reserved[x]._id }},
+                            { safe: true, multi: true }).populate({path:'reserved', select:'_id', model: 'Reserved' }).exec(function(err, obj){
+                                Reserved.findByIdAndRemove(foundFilmSched.reserved[x]._id, function(err){
+                                    if(err){
+                                        console.log(err);
+                                    } else {
+                                    }
+                                });
+                            });
+                    }
+                }
+                res.redirect("/reservedSeats");
+            } else {
+                foundFilmSched.reserved.forEach(function(reservation){
+                    if(reservation.owner_id == req.params.userID){
+                        FilmSchedule.update(
+                            { _id: req.params.schedID },
+                            { "$pull": { "reserved": reservation._id }},
+                            { safe: true, multi: true }).populate({path:'reserved', select:'_id', model: 'Reserved' }).exec(function(err, obj){
+                                // res.send(obj);
+                                Reserved.findByIdAndRemove(reservation._id, function(err){
+                                    if(err){
+                                        console.log(err);
+                                    } else {
+                                        res.redirect("/reservedSeats");
+                                    }
+                                });                
+                        });
+                    }
+                });
+            }
+        }
+    });
+});
+
+
+
+
 // UPDATE RESERVATION ROUTE
 app.get("/editReservation/:user/:film/:sched", function(req, res){
     res.send(req.params.user);
 });
-
-// DELETE RESERVATION ROUTE
-app.get("/cancelReservation/:user/:film/:sched", function(req, res){
-    res.send(req.params.user);
-});
-
 
 // ADD FILM SCHEDULE ROUTE
 app.get("/addFilmSchedule", function(req, res){
