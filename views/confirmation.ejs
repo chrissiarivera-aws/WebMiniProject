@@ -1,0 +1,139 @@
+<%- include("partials/header") %>
+
+
+<link rel="stylesheet" href="/bootstrap/style.css">
+<link rel="stylesheet" href="/bootstrap/order.css">
+<title>Reserved</title>
+</head>
+
+<body>    
+<nav class="mrs-navigation navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="mrs-brand navbar-brand" href="/">Reserved</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggle">
+        <ul class="mrs-navigation-list navbar-nav mr-auto">
+            <li class="mrs-navigation-link nav-item">
+                <a class="nav-link" href="/films">Films</a>
+            </li>
+            <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item">
+                <a class="nav-link" href="/reservedSeats">Reserved<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="mrs-navigation-link mrs-navigation-link-reserve nav-item active">
+                <a class="nav-link" href="reserve.html">Reserve Seats<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <section class="mrs-user navigation-link">
+            <img class="mrs-user-avatar" src="img/user-avatar.png">
+            <span>John Smith</span>
+        </section>
+        <form class="mrs-nav-search form-inline my-2 my-lg-0" method="get" action="reserve.html">
+            <input class="form-control mr-sm-2" type="search"  name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<main>
+    <div class="mrs-order mrs-section container">
+        <h2>Reservation Confirmation</h2>
+        <div class="mrs-order-content">
+            <form action="/checkout/<%= user._id %>/<%= film._id %>/<%= sched._id %>" method="POST" onsubmit="return confirm('Reserve seat(s) now?');">
+                
+                <div class="form-group row">
+                    <label for="mrs-summary-name" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="mrs-summary-name" value="<%= user.name %>" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mrs-summary-film" class="col-sm-2 col-form-label">Film</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="mrs-summary-film" value="<%= film.title %>" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mrs-summary-cinema" class="col-sm-2 col-form-label">Cinema</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="mrs-summary-cinema" value="<%= sched.cinema_no %>" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mrs-summary-datetime" class="col-sm-2 col-form-label">Time/Date</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="mrs-summary-time" value="<%= sched.time %>" disabled>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="mrs-summary-date" value="<%= sched.date.toDateString() %>" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mrs-summary-seats" class="col-sm-2 col-form-label">Seats</label>
+                    <div class="col-sm-8">
+                        <% var seatString = ""; %>
+                        <% for(var x = 0; x < seatSelected.length; x++){ %>
+                            <% seatString += seatSelected[x] + " "; %>
+                        <% } %>
+                        <input type="text" class="form-control" id="mrs-summary-seats" name="seatSel" value="<%= seatString %>" readonly>
+                    </div>
+                </div>
+                
+                <table class="table" style="background-color: seashell;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mrs-summary-price">
+                        <tr>
+                            <td>Regular</td>
+                            <td>
+                                <input type="number" min="0" class="form-control" id="mrs-order-regulars" name="noOfRegulars" value="<%= seats.regularSeats %>" readonly>
+                            </td>
+                            <td>₱ 150</td>
+                            <td>₱ <%= seats.regularSeats * 150 %></td>
+                        </tr>
+                        <tr>
+                            <td>Senior</td>
+                            <td>
+                                <input type="number" min="0" class="form-control" id="mrs-order-seniors" name="noOfSeniors" value="<%= seats.seniorSeats %>" readonly>
+                            </td>
+                            <td>₱ 120</td>
+                            <td>₱ <%= seats.seniorSeats * 120 %></td>
+                        </tr>
+                        <tr>
+                            <td>Kid</td>
+                            <td>
+                                <input type="number" min="0" class="form-control" id="mrs-order-kids" name="noOfKids" value="<%= seats.kidSeats %>" readonly>
+                            </td>
+                            <td>₱ 100</td>
+                            <td>₱ <%= seats.kidSeats * 100 %></td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td><%= seats.totalSeats %></td>
+                            <td></td>
+                            <td>₱ <%= (seats.regularSeats * 150) + (seats.seniorSeats * 120) + (seats.kidSeats * 100) %></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <input type="submit" id="mrs-order-proceed" class="mrs-film-reserve mrs-rounded-btn btn btn-primary float-right" value="Reserve">
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</main>
+
+
+<%- include("partials/footer") %>

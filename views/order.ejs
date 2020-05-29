@@ -78,7 +78,7 @@
         <div class="mrs-order mrs-section container">
             <h2>Reservation Form</h2>
             <div class="mrs-order-content">
-                <form action="/checkout/<%= user._id %>/<%= film._id %>/<%= sched._id %>" method="POST" onsubmit="return confirm('Continue reserving seat(s)?');">
+                <form action="/confirmation/<%= user._id %>/<%= film._id %>/<%= sched._id %>" method="POST" onsubmit="return confirm('Continue reserving seat(s)?');">
                     <div class="form-group row">
                         <label for="mrs-order-name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-6">
@@ -280,9 +280,6 @@
             </div>
         </div>
     </main>
-
-    <script type="text/javascript" src="/javascript/order.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     
 
 <%- include("partials/footer") %>

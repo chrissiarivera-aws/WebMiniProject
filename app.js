@@ -106,18 +106,75 @@ app.get("/order/:id", function(req, res){
     });
 });
 
-// CHECKOUT ROUTE
-app.post("/checkout/:user/:film/:sched", function(req, res){
-    console.log(req.body);
-    console.log(req.params.user);
+// CONFIRMATION ROUTE
+app.post("/confirmation/:user/:film/:sched", function(req, res){
     var regularSeats = Number(req.body.noOfRegulars);
     var kidSeats = Number(req.body.noOfKids);
     var seniorSeats = Number(req.body.noOfSeniors);
     var totalSeats = Number(req.body.noOfRegulars) + Number(req.body.noOfKids) + Number(req.body.noOfSeniors);
+    var seatsArr = {
+        "regularSeats": regularSeats,
+        "kidSeats": kidSeats,
+        "seniorSeats": seniorSeats,
+        "totalSeats": totalSeats
+    }
+
+    // res.send(req.body.seat);
 
     if(totalSeats != req.body.seat.length || req.body.seat.length == null){
+        res.redirect("/film/" + req.params.film);
+    } else {
+        User.findById(req.params.user, function(err, foundUser){
+            if(err){
+                console.log(err);
+            } else {
+                FilmSchedule.findById(req.params.sched, function(err, foundFilmSched){
+                    if(err){
+                        console.log(err);
+                    } else {
+                        Film.findById(req.params.film, function(err, foundFilm){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                res.render('confirmation', {
+                                    user: foundUser,
+                                    film: foundFilm,
+                                    sched: foundFilmSched,
+                                    seats: seatsArr,
+                                    seatSelected: req.body.seat
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+});
+
+// CHECKOUT ROUTE
+app.post("/checkout/:user/:film/:sched", function(req, res){
+    var regularSeats = Number(req.body.noOfRegulars);
+    var kidSeats = Number(req.body.noOfKids);
+    var seniorSeats = Number(req.body.noOfSeniors);
+    var totalSeats = Number(req.body.noOfRegulars) + Number(req.body.noOfKids) + Number(req.body.noOfSeniors);
+    var seat = req.body.seatSel;
+    seat.split(" ");
+    var seatArray = new Array();
+    var xx = "";
+    for(var i = 0; i < seat.length; i++){
+        if(seat[i] == " "){
+            seatArray.push(xx);
+            xx = "";
+        } else {
+            xx += seat[i];
+        }
+    }
+
+    // res.send("Seats: " + seatArray);
+
+    if(totalSeats != seatArray.length || seatArray.length == null){
         // alert("The number of seats selected and inputted do not match. Please try again!");
-        req.flash('info', 'The # of seats inputted and the # of seats selected does not match. Please try again.')
         res.redirect("/film/" + req.params.film);
     } else {
         User.findById(req.params.user, function(err, foundUser){
@@ -130,7 +187,7 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
                     if(regularSeats > 0){
                         regularSeats--;
                         Reserved.create({
-                            seat: req.body.seat[i-1],
+                            seat: seatArray[i-1],
                             price: 150
                         }, function(err, reserved){
                             if(err){
@@ -163,7 +220,7 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
                     } else if(kidSeats > 0){
                         kidSeats--;
                         Reserved.create({
-                            seat: req.body.seat[i-1],
+                            seat: seatArray[i-1],
                             price: 100
                         }, function(err, reserved){
                             if(err){
@@ -197,7 +254,7 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
                     } else if(seniorSeats > 0){
                         seniorSeats--;
                         Reserved.create({
-                            seat: req.body.seat[i-1],
+                            seat: seatArray[i-1],
                             price: 120
                         }, function(err, reserved){
                             if(err){
