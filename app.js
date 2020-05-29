@@ -37,18 +37,14 @@ app.get("/films", function(req, res){
 
 // VIEW FILM TO RESERVE ROUTE
 app.get("/film/:id", function(req, res){
-    // res.send(req.params.movieID)
     Film.findOne({_id: req.params.id}, function(err, foundFilm){
         if(err){
             console.log(err);
         } else {
-            // res.render("film", {film: foundFilm});
             FilmSchedule.find({movie_id: req.params.id}, function(err, foundFilmSched){
                 if(err){
                     console.log(err);
                 } else {
-                    // res.send(foundFilm, foundFilmSched);
-                    // res.render("film", {film: foundFilm, sched: foundFilmSched});
                     res.render('film', {
                         film: foundFilm,
                         scheds: foundFilmSched
@@ -61,7 +57,6 @@ app.get("/film/:id", function(req, res){
 
 // ORDER ROUTE
 app.get("/order/:id", function(req, res){
-    // res.render("order");
 
     User.findOne({name: "John Smith"}, function(err, foundUser){
         if(err){
@@ -71,7 +66,6 @@ app.get("/order/:id", function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    // res.render("film", {film: foundFilm});
                     Film.findOne({_id: foundFilmSched.movie_id}, function(err, foundFilm){
                         if(err){
                             console.log(err);
@@ -81,8 +75,6 @@ app.get("/order/:id", function(req, res){
                                 for(var x in foundFilmSched.reserved){
                                     seatsArr.push(foundFilmSched.reserved[x].seat);
                                 }
-                                // res.send(seatsArr);
-                                console.log("FOUND FILM SCHED !!!!!!!!!!!!!!!!!!!!! " + foundFilmSched);
                                 res.render('order', {
                                     user: foundUser,
                                     film: foundFilm,
@@ -90,7 +82,6 @@ app.get("/order/:id", function(req, res){
                                     seats: seatsArr
                                 });
                             } else {
-                                console.log("FOUND FILM SCHED !!!!!!!!!!!!!!!!!!!!! " + foundFilmSched);
                                 res.render('order', {
                                     user: foundUser,
                                     film: foundFilm,
@@ -118,8 +109,6 @@ app.post("/confirmation/:user/:film/:sched", function(req, res){
         "seniorSeats": seniorSeats,
         "totalSeats": totalSeats
     }
-
-    // res.send(req.body.seat);
 
     if(totalSeats != req.body.seat.length || req.body.seat.length == null){
         res.redirect("/film/" + req.params.film);
@@ -170,8 +159,6 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
             xx += seat[i];
         }
     }
-
-    // res.send("Seats: " + seatArray);
 
     if(totalSeats != seatArray.length || seatArray.length == null){
         // alert("The number of seats selected and inputted do not match. Please try again!");
@@ -243,7 +230,6 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
                                             if(err){
                                                 console.log(err);
                                             } else {
-                                                // res.redirect("/reservedSeats");
                                                 console.log(data);
                                             }
                                         });
@@ -277,7 +263,6 @@ app.post("/checkout/:user/:film/:sched", function(req, res){
                                             if(err){
                                                 console.log(err);
                                             } else {
-                                                // res.redirect("/reservedSeats");
                                                 console.log(data);
                                             }
                                         });
@@ -300,19 +285,16 @@ app.get("/reservedSeats", function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(foundUser);
             FilmSchedule.find().populate({
                 path: "reserved",
                 populate: { path: "owner_id" }}).exec(function(err, foundSched){
                 if(err){
                     console.log(err);
                 } else {
-                    console.log("SCHED !" + foundSched);
                     Film.find({}, function(err, foundFilm){
                         if(err){
                             console.log(err);
                         } else {
-                            console.log("FILM! " + foundFilm);
                             res.render("reserved-seats", {user: foundUser, scheds: foundSched, films: foundFilm});
                         }
                     });
@@ -359,7 +341,6 @@ app.delete("/cancelReservation/:userID/:filmID/:schedID", function(req, res){
                             { _id: req.params.schedID },
                             { "$pull": { "reserved": reservation._id }},
                             { safe: true, multi: true }).populate({path:'reserved', select:'_id', model: 'Reserved' }).exec(function(err, obj){
-                                // res.send(obj);
                                 Reserved.findByIdAndRemove(reservation._id, function(err){
                                     if(err){
                                         console.log(err);
@@ -407,20 +388,6 @@ app.post("/addFilmSchedule", function(req, res){
         }
     });
 });
-
-
-
-// VIEW FILM SCHED ROUTE
-// app.get("/film", function(req, res){
-//     FilmSchedule.find({}, function(err, scheds){
-//         if(err){
-//             console.log("ERROR!");
-//         } else {
-//             res.render("film", {scheds: scheds});
-//         }
-//     });
-// });
-
 
 app.listen(3000, function(){
     console.log("WEB INDIVIDUAL MINI PROJECT SERVER HAS STARTED!");
