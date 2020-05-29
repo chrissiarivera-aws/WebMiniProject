@@ -78,9 +78,9 @@
                                         <td><%= scheds[i].time %></td>
                                         <td><%= scheds[i].cinema_no %></td>
                                         <td><%= qty %></td>
-                                        <td class="reservation-list-button">
+                                        <!-- <td class="reservation-list-button">
                                             <a class="edit-reservation edit-list-button edit-reservation-btn" href="/editReservation/<%= user._id %>/<%= filmID %>/<%= schedID %>">Edit</a>
-                                        </td>
+                                        </td> -->
                                         <td class="reservation-list-button">
                                             <form action="/cancelReservation/<%= user._id %>/<%= filmID %>/<%= schedID %>?_method=DELETE" method="POST">
                                                 <button class="cancel-reservation cancel-list-button cancel-reservation-btn">Cancel</button>
@@ -92,7 +92,9 @@
                             <% if(hasReservation){ %>
 
                             <% } else { %>
-                                <span class="mrs-no-result">You have no reserved seats..</span>
+                                <tr>
+                                    <th>You have no reserved seats..</th>
+                                </tr>
                             <% } %>
                         </tbody>
                     </table>

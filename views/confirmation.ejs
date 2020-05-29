@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 
-                <table class="table" style="background-color: seashell;">
+                <table class="table centerText" style="background-color: seashell;">
                     <thead class="thead">
                         <tr>
                             <th scope="col">Type</th>
@@ -92,7 +92,7 @@
                         <tr>
                             <td>Regular</td>
                             <td>
-                                <input type="number" min="0" class="form-control" id="mrs-order-regulars" name="noOfRegulars" value="<%= seats.regularSeats %>" readonly>
+                                <input type="number" min="0" class="form-control centerText" id="mrs-order-regulars" name="noOfRegulars" value="<%= seats.regularSeats %>" readonly>
                             </td>
                             <td>₱ 150</td>
                             <td>₱ <%= seats.regularSeats * 150 %></td>
@@ -100,7 +100,7 @@
                         <tr>
                             <td>Senior</td>
                             <td>
-                                <input type="number" min="0" class="form-control" id="mrs-order-seniors" name="noOfSeniors" value="<%= seats.seniorSeats %>" readonly>
+                                <input type="number" min="0" class="form-control centerText" id="mrs-order-seniors" name="noOfSeniors" value="<%= seats.seniorSeats %>" readonly>
                             </td>
                             <td>₱ 120</td>
                             <td>₱ <%= seats.seniorSeats * 120 %></td>
@@ -108,16 +108,16 @@
                         <tr>
                             <td>Kid</td>
                             <td>
-                                <input type="number" min="0" class="form-control" id="mrs-order-kids" name="noOfKids" value="<%= seats.kidSeats %>" readonly>
+                                <input type="number" min="0" class="form-control centerText" id="mrs-order-kids" name="noOfKids" value="<%= seats.kidSeats %>" readonly>
                             </td>
                             <td>₱ 100</td>
                             <td>₱ <%= seats.kidSeats * 100 %></td>
                         </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td><%= seats.totalSeats %></td>
+                        <tr style="background-color: wheat;">
+                            <td><strong>Total</strong></td>
+                            <td style="text-align: right;"><strong><%= seats.totalSeats %></strong></td>
                             <td></td>
-                            <td>₱ <%= (seats.regularSeats * 150) + (seats.seniorSeats * 120) + (seats.kidSeats * 100) %></td>
+                            <td><strong>₱ <%= (seats.regularSeats * 150) + (seats.seniorSeats * 120) + (seats.kidSeats * 100) %></strong></td>
                         </tr>
                         
                     </tbody>

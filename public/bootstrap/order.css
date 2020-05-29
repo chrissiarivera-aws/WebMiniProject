@@ -1,5 +1,9 @@
 @import "style.css";
 
+.centerText {
+    text-align: center;
+}
+
 button.mrs-seat{
     border-radius: 4px;
     padding-top: 4px;

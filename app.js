@@ -335,13 +335,20 @@ app.delete("/cancelReservation/:userID/:filmID/:schedID", function(req, res){
                             { _id: req.params.schedID },
                             { "$pull": { "reserved": foundFilmSched.reserved[x]._id }},
                             { safe: true, multi: true }).populate({path:'reserved', select:'_id', model: 'Reserved' }).exec(function(err, obj){
-                                Reserved.findByIdAndRemove(foundFilmSched.reserved[x]._id, function(err){
-                                    if(err){
-                                        console.log(err);
-                                    } else {
-                                    }
-                                });
-                            });
+                                if(err){
+
+                                } else {
+                                    
+                                }
+                        });
+                        
+                        Reserved.findByIdAndRemove(foundFilmSched.reserved[x]._id, function(err){
+                            if(err){
+                                console.log(err);
+                            } else {
+
+                            }
+                        });
                     }
                 }
                 res.redirect("/reservedSeats");
